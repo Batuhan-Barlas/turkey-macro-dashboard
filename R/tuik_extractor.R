@@ -251,46 +251,79 @@ parse_month_value <- function(x) {
   val[[1]]
 }
 
+
 .detect_file_format_from_path <- function(path) {
+
   con <- file(path, "rb")
   on.exit(close(con), add = TRUE)
-  
-  size <- file.info(path)$size
-  n <- min(512L, ifelse(is.na(size), 512L, size))
-  raw_head <- readBin(con, what = "raw", n = n)
-  
-  if (length(raw_head) >= 4 &&
-      identical(as.integer(raw_head[1:4]), c(0x50, 0x4B, 0x03, 0x04))) {
+
+  raw_head <- readBin(
+    con,
+    what = "raw",
+    n = 512L
+  )
+
+  # Print binary signature for diagnostic purposes.
+  message(
+    "File signature: ",
+    paste(
+      format(head(raw_head, 8L)),
+      collapse = " "
+    )
+  )
+
+  # XLSX: ZIP container signature.
+  if (
+    length(raw_head) >= 4L &&
+    identical(
+      raw_head[1:4],
+      as.raw(c(0x50, 0x4B, 0x03, 0x04))
+    )
+  ) {
     return("xlsx")
   }
-  
-  if (length(raw_head) >= 4 &&
-      identical(as.integer(raw_head[1:4]), c(0xD0, 0xCF, 0x11, 0xE0))) {
+
+  # XLS: OLE compound file signature.
+  if (
+    length(raw_head) >= 8L &&
+    identical(
+      raw_head[1:8],
+      as.raw(c(
+        0xD0, 0xCF, 0x11, 0xE0,
+        0xA1, 0xB1, 0x1A, 0xE1
+      ))
+    )
+  ) {
     return("xls")
   }
-  
+
+  # Check whether the server returned HTML.
   text_head <- tryCatch(
     rawToChar(raw_head),
     error = function(e) ""
   )
+
   text_head_lc <- tolower(text_head)
-  
-  if (grepl("<html", text_head_lc, fixed = TRUE) ||
-      grepl("<!doctype", text_head_lc, fixed = TRUE)) {
+
+  if (
+    grepl("<html", text_head_lc, fixed = TRUE) ||
+    grepl("<!doctype", text_head_lc, fixed = TRUE)
+  ) {
     return("html")
   }
-  
-  if (length(raw_head) > 0) {
-    comma_count <- length(gregexpr(",", text_head, fixed = TRUE)[[1]])
-    semi_count <- length(gregexpr(";", text_head, fixed = TRUE)[[1]])
-    line_count <- length(gregexpr("\n", text_head, fixed = TRUE)[[1]])
-    if ((comma_count >= 2 || semi_count >= 2) && line_count >= 1) {
-      return("csv")
-    }
+
+  # Fallback: try opening the file directly.
+  if (!is.null(.try_excel_sheets(path, "xlsx"))) {
+    return("xlsx")
   }
-  
+
+  if (!is.null(.try_excel_sheets(path, "xls"))) {
+    return("xls")
+  }
+
   "unknown"
 }
+
 
 extract_series_from_starts_consecutive_dates <- function(
   df,
