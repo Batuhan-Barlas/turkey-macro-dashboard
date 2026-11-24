@@ -26,7 +26,7 @@ add <- function(id, date, value, title, block, freq, unit, source, transform) {
   keep <- !is.na(date) & is.finite(value)
   date <- as.character(date[keep]); value <- as.numeric(value[keep])
   if (!length(value) || anyDuplicated(date) || is.unsorted(date)) stop(paste('Invalid output:',id))
-  series[[paste0('TR_',id)]] <<- list(titulo_serie=title,subtitulo_descripcion=paste('Türkiye.',title,unit),transformacion_y_calculo=transform,fuente=source,frecuencia_y_cobertura_temporal=paste(min(date),'to',max(date)),tipo_grafico='Line',bloque=block,'área'=block,frecuencia=freq,unidad=unit,observaciones=Map(function(d,v) list(d,v),date,value))
+  series[[paste0('TR_',id)]] <<- list(titulo_serie=title,subtitulo_descripcion=paste('Türkiye.',title,unit),transformacion_y_calculo=transform,fuente=source,frecuencia_y_cobertura_temporal=paste(min(date),'to',max(date)),tipo_grafico='Line',bloque=block,'área'=block,frecuencia=freq,unidad=unit,observaciones=unname(Map(function(d,v) list(d,v),date,value)))
 }
 lag_n <- function(x,n) { if(length(x)<=n) return(rep(NA_real_,length(x))); c(rep(NA_real_,n),head(x,-n)) }
 roll <- function(x,n,fun) zoo::rollapplyr(x,n,fun,fill=NA_real_,partial=FALSE)
