@@ -66,11 +66,6 @@ jobs:
           '
 
 
-      - name: List GDP catalogue
-        run: |
-          Rscript R/list_gdp_catalogue.R
-          cat gdp_catalogue.csv
-
       - name: Update EVDS and TurkStat data
         env:
           EVDS_API_KEY: ${{ secrets.EVDS_API_KEY }}
