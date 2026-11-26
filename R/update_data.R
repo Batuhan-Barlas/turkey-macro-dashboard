@@ -83,6 +83,9 @@ for(nm in c(names(trade),'TRADE_BALANCE')) {
   add(nm,t$date,x/1e6,nm,'EXTERNAL_TRADE','Mensual','USD bn',src,'Shiny scaling: assumed USD thousand divided by 1e6; balance exports minus imports')
   add(paste0(nm,'_12M'),t$date,roll(x,12,sum)/1e6,paste(nm,'12-month sum'),'EXTERNAL_TRADE','Mensual','USD bn',src,'Trailing 12-month sum; divide by 1e6')
 }
+# GDP module runs before atomic snapshot export.
+source('R/national_accounts.R', encoding='UTF-8')
+update_gdp()
 # Export exact original Turkey snapshot structure, with explicit weekly extension.
 # No existing internal/example snapshot is copied automatically.
 path <- 'site/drive_ingestion/snapshots/turkey.json'
