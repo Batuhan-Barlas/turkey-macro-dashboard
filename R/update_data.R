@@ -151,7 +151,38 @@ if(file.exists('inputs/rate_bands.csv')) {
   a$date <- as.Date(a$date); a <- a[order(a$date),]; stopifnot(!anyNA(a$date),!anyDuplicated(a$date))
   dates <- seq(min(a$date),Sys.Date(),by='day'); ix <- findInterval(dates,a$date)
   for(nm in c('LOWER_BAND','UPPER_BAND')) add(nm,dates,a[[nm]][ix],nm,'INTEREST_RATES','Diaria','%','CBRT interest-rate corridor (provided CSV)','Last effective rate carried forward')
-} else message('Optional corridor CSV absent; corridor lines omitted.')
+
+# CBRT overnight interest rate corridor.
+# Retrieve official rate decisions and carry forward
+# the latest effective rates to daily frequency.
+
+source('R/fetch_cbrt_corridor.R', encoding = 'UTF-8')
+
+a <- fetch_cbrt_corridor()
+
+dates <- seq(
+  min(a$date),
+  Sys.Date(),
+  by = 'day'
+)
+
+ix <- findInterval(dates, a$date)
+
+for (nm in c('LOWER_BAND', 'UPPER_BAND')) {
+
+  add(
+    nm,
+    dates,
+    a[[nm]][ix],
+    nm,
+    'INTEREST_RATES',
+    'Diaria',
+    '%',
+    'CBRT official interest rate decisions',
+    'Last effective rate carried forward daily'
+  )
+}
+
 # CPI, 2025-base series from the supplied Shiny source.
 cpi <- c(CPI_HEADLINE='TP.TUKFIY2025.GENEL',CPI_CORE_B='TP.FE25.OKTG03',CPI_CORE_C='TP.FE25.OKTG04',CPI_GOODS='TP.FE25.OKTG08',CPI_SERVICES='TP.FE25.OKTG23')
 c <- fetch(cpi,'01-01-2003',5,'CPI indices')
