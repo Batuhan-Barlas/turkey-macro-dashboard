@@ -35,7 +35,7 @@ update_gdp <- function() {
   raw <- lapply(names(codes),function(g) fetch(codes[[g]],'01-01-2009',6,g)); names(raw)<-names(codes)
   # Normalize dates and join to a full calendar before calculating lags.
   for(g in names(raw)) { d<-raw[[g]]; m<-as.integer(format(d$date,'%m')); d$date<-as.Date(sprintf('%s-%02d-01',format(d$date,'%Y'),1+3*((m-1)%/%3))); stopifnot(!anyDuplicated(d$date)); raw[[g]]<-d }
-  dates<-seq(min(do.call(c,lapply(raw,function(d)d$date))),max(do.call(c,lapply(raw,function(d)d$date))),by='quarter')
+  dates<-seq(min(do.call(base::c,lapply(raw,function(d)d$date))),max(do.call(base::c,lapply(raw,function(d)d$date))),by='quarter')
   raw<-lapply(raw,function(d) merge(data.frame(date=dates),d,by='date',all.x=TRUE,sort=TRUE))
   growth<-function(x,n) { l<-lag_n(x,n); ifelse(l>0,100*(x/l-1),NA_real_) }
   yoy<-growth(raw$demand_real$GDP,4); qoq<-growth(raw$gdp_sca$GDP,1)
