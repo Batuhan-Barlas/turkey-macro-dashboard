@@ -1,4 +1,3 @@
-
 name: Update Turkey data and deploy
 
 on:
@@ -25,7 +24,6 @@ jobs:
         with:
           r-version: '4.5.2'
           use-public-rspm: true
-
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -37,14 +35,14 @@ jobs:
             any::httr
             any::readxl
             any::openxlsx
+            any::rvest
           cache: true
 
       - name: Verify R dependencies
         run: |
           Rscript -e '
             pkgs <- c("CBRT", "jsonlite", "zoo", "R6",
-                      "httr", "readxl", "openxlsx")
-
+                      "httr", "readxl", "openxlsx", "rvest")
             missing <- pkgs[!vapply(
               pkgs, requireNamespace,
               logical(1), quietly = TRUE
@@ -64,7 +62,6 @@ jobs:
               packageVersion("CBRT") >= "0.2.0"
             )
           '
-
 
       - name: Update EVDS and TurkStat data
         env:
@@ -87,7 +84,6 @@ jobs:
     permissions:
       pages: write
       id-token: write
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
