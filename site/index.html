@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" data-monitor="turkey"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Türkiye Macro Monitor — experimental</title>
+<title>Türkiye Macro Monitor</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -212,12 +212,12 @@ footer .wrap{padding-block:0 32px}
 @media(max-width:600px){.datactl{align-items:flex-start}.status{text-align:left}.kpi .val{font-size:26px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
-<style>.bbmultiples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.bbmini{min-width:0}.bbmini-chart{width:100%}.bbheat-scroll{overflow:auto;max-width:100%}.bbheat{border-collapse:separate;border-spacing:2px;font-size:11px}.bbheat th{white-space:nowrap;padding:5px;text-align:left}.bbheat th:first-child{position:sticky;left:0;background:var(--surface);z-index:1;max-width:200px;overflow:hidden;text-overflow:ellipsis}.bbheat td{min-width:34px;height:28px}.bbheat .bbmissing{background:#d5dee8}@media(max-width:700px){.bbmultiples{grid-template-columns:1fr}}.bigheat-layout{display:block}.bigheat-layout>.bbside{display:none}.bigmap-scroll{max-width:100%;overflow-x:auto}.bigmap{border-collapse:collapse;table-layout:fixed;width:max(100%,1098px);font-size:12px;color:var(--ink)}.bigmap col.bigmap-label{width:240px}.bigmap col.bigmap-value{width:66px}.bigmap th,.bigmap td{box-sizing:border-box;border:1px solid #fff;padding:5px 6px;line-height:1.2}.bigmap thead th{background:#001391;color:#fff;text-align:center;font-weight:600;font-size:11px;white-space:normal}.bigmap .bigmap-section{background:#001391;color:#fff;text-align:left;font-weight:700}.bigmap .bigmap-label-cell{text-align:left;white-space:normal;overflow-wrap:anywhere}.bigmap td{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}.bigmap .bigmissing{background:#e6e8ec;color:#7d8aa0}.bigmap td.bigmap-week-start,.bigmap th.bigmap-week-start{border-left:3px solid white}.bigmap col.bigmap-gap{width:12px}.bigmap th.bigmap-spacer,.bigmap td.bigmap-spacer{background:#fff!important;border:0;padding:0}</style></head><body>
+<style>.bbmultiples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.bbmini{min-width:0}.bbmini-chart{width:100%}.bbheat-scroll{overflow:auto;max-width:100%}.bbheat{border-collapse:separate;border-spacing:2px;font-size:11px}.bbheat th{white-space:nowrap;padding:5px;text-align:left}.bbheat th:first-child{position:sticky;left:0;background:var(--surface);z-index:1;max-width:200px;overflow:hidden;text-overflow:ellipsis}.bbheat td{min-width:34px;height:28px}.bbheat .bbmissing{background:#d5dee8}@media(max-width:700px){.bbmultiples{grid-template-columns:1fr}}.bigheat-layout{display:block}.bigheat-layout>.bbside{display:none}.bigmap-scroll{max-width:100%;overflow-x:auto}.bigmap{border-collapse:collapse;table-layout:fixed;width:max(100%,1098px);font-size:12px;color:var(--ink)}.bigmap col.bigmap-label{width:240px}.bigmap col.bigmap-value{width:66px}.bigmap th,.bigmap td{box-sizing:border-box;border:1px solid #fff;padding:5px 6px;line-height:1.2}.bigmap thead th{background:#001391;color:#fff;text-align:center;font-weight:600;font-size:11px;white-space:normal}.bigmap .bigmap-section{background:#001391;color:#fff;text-align:left;font-weight:700}.bigmap .bigmap-label-cell{text-align:left;white-space:normal;overflow-wrap:anywhere}.bigmap td{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}.bigmap .bigmissing{background:#e6e8ec;color:#7d8aa0}.bigmap td.bigmap-week-start,.bigmap th.bigmap-week-start{border-left:3px solid white}.bigmap col.bigmap-gap{width:12px}.bigmap th.bigmap-spacer,.bigmap td.bigmap-spacer{background:#fff!important;border:0;padding:0}</style><style>.tr-catalogue{min-width:880px;width:100%;table-layout:fixed}.tr-catalogue th,.tr-catalogue td{text-align:left;vertical-align:top;white-space:normal;overflow-wrap:anywhere}.tr-catalogue th:nth-child(1){width:24%}.tr-catalogue th:nth-child(2){width:15%}.tr-catalogue th:nth-child(3){width:22%}.tr-catalogue th:nth-child(4){width:27%}.tr-catalogue th:nth-child(5){width:12%}</style></head><body>
 
 <header class="mast"><div class="wrap">
   <div>
     <a href="index.html" hidden class="home-link" style="display:inline-block;color:var(--accent);font-size:13px;font-weight:600;text-decoration:none;margin-bottom:10px">← Volver a la portada</a>
-    <p class="eyebrow">Experimental dashboard</p>
+    <p class="eyebrow">Macroeconomic dashboard</p>
     <h1>BBVA Research Monitor Macro España</h1>
     <p class="lede">Actividad, empleo, precios, cuentas públicas, sector exterior y condiciones financieras de la economía española, con las series oficiales del INE, el Banco de España, la Seguridad Social, el Ministerio de Trabajo, el Ministerio de Vivienda y el Ministerio de Economía.</p>
   </div>
@@ -497,7 +497,7 @@ let dashboardBase = JSON.parse(document.getElementById('embedded-data').textCont
 let DATA = { ...dashboardBase, series: { ...dashboardBase.series } };
 let SOURCE_NOTE = 'datos incrustados en la página';
 const S = () => DATA.series;
-const state = {tab:IS_TURKEY?'tr_rates':'resumen', range:'4a'};
+const state = {tab:IS_TURKEY?'tr_activity':'resumen', range:'4a'};
 const RANGES=['1a','4a','10a','todo','custom'];
 const customRange={start:'',end:''};try{Object.assign(customRange,JSON.parse(localStorage.getItem('mme-custom-range')||'{}'))}catch(e){}
 const MES_ES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'], MES_EN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -684,7 +684,7 @@ const FIGS = {
     {t:'Dudosidad por finalidad', sub:'Créditos dudosos sobre el saldo de cada finalidad, %, trimestral', lines:[{id:'dud_prod',name:'Actividades productivas',short:'Empresas',color:'--s1'},{id:'dud_viv',name:'Vivienda',color:'--s2'},{id:'dud_cons',name:'Consumo',color:'--s3'}], endLabels:true},
   ],
 };
-const TABS=IS_TURKEY?[{k:'tr_rates',l:'Loan & Deposit Rates'},{k:'tr_bop',l:'Balance of Payments'},{k:'tr_trade',l:'External Trade'},{k:'tr_cpi',l:'Inflation'},{k:'tr_activity',l:'Activity'},{k:'explorador',l:'Blackboard'}]:[{k:'resumen',l:'Resumen'},{k:'explorador',l:'Blackboard'},{k:'actividad',l:'Actividad'},{k:'empleo',l:'Empleo'},{k:'precios',l:'Precios'},{k:'vivienda',l:'Vivienda'},{k:'credito',l:'Créditos y depósitos'},{k:'publico',l:'Sector público'},{k:'exterior',l:'Sector exterior'},{k:'previsiones',l:'Previsiones BBVA Research'},{k:'bigdata',l:'Big Data'},{k:'migracion',l:'Análisis de migración'},{k:'tablas',l:'Tablas'},{k:'fuentes',l:'Fuentes y método'}];
+const TABS=IS_TURKEY?[{k:'tr_activity',l:'Activity'},{k:'tr_cpi',l:'Inflation'},{k:'tr_trade',l:'External Trade'},{k:'tr_bop',l:'Balance of Payments'},{k:'tr_rates',l:'Banking & Financial Markets'},{k:'explorador',l:'Blackboard'},{k:'tr_sources',l:'Sources & Method'}]:[{k:'resumen',l:'Resumen'},{k:'explorador',l:'Blackboard'},{k:'actividad',l:'Actividad'},{k:'empleo',l:'Empleo'},{k:'precios',l:'Precios'},{k:'vivienda',l:'Vivienda'},{k:'credito',l:'Créditos y depósitos'},{k:'publico',l:'Sector público'},{k:'exterior',l:'Sector exterior'},{k:'previsiones',l:'Previsiones BBVA Research'},{k:'bigdata',l:'Big Data'},{k:'migracion',l:'Análisis de migración'},{k:'tablas',l:'Tablas'},{k:'fuentes',l:'Fuentes y método'}];
 const TITLES={vivienda:'Vivienda',actividad:'Actividad y demanda',empleo:'Mercado laboral',precios:'Precios y salarios',publico:'Sector público',exterior:'Sector exterior',financiero:'Condiciones financieras',credito:'Créditos y depósitos'};
 
 /* KPI tiles: polarity +1 = up is favourable, -1 = up is unfavourable, 0 = no judgement */
@@ -900,7 +900,7 @@ ${isEN()?`  <div class="prose">
 /* -------------------------------------------------------------- explorer: gallery, multi-series chart and scatter */
 const TURKEY_BLOCKS={GDP_EXPENDITURE:'PIB por el gasto',GDP_PRODUCTION:'PIB por la producción',
   HIGH_FREQUENCY_ACTIVITY:'Actividad de alta frecuencia',LABOUR_MARKET:'Mercado laboral',
-  PMI_CAPACITY:'PMI y utilización de capacidad',CONFIDENCE:'Confianza',INTEREST_RATES:'Loan & Deposit Rates',INFLATION:'Inflation',BALANCE_OF_PAYMENTS:'Balance of Payments',EXTERNAL_TRADE:'External Trade',other:'Otras series'};
+  PMI_CAPACITY:'PMI y utilización de capacidad',CONFIDENCE:'Confianza',INTEREST_RATES:'Banking & Financial Markets',INFLATION:'Inflation',BALANCE_OF_PAYMENTS:'Balance of Payments',EXTERNAL_TRADE:'External Trade',other:'Otras series'};
 Object.assign(EN,{'PIB por el gasto':'GDP by expenditure','PIB por la producción':'GDP by production',
   'Actividad de alta frecuencia':'High-frequency activity','Mercado laboral':'Labour market',
   'PMI y utilización de capacidad':'PMI and capacity utilisation',Confianza:'Confidence','Otras series':'Other series',
@@ -1273,28 +1273,76 @@ Object.assign(TR_LABELS,{GDP_YOY:'GDP YoY',GDP_QOQ_SCA:'GDP QoQ (SCA)',GDP_DEMAN
 const trGDPLine=()=>trSeries(['GDP_YOY']).map(v=>({...v,color:'--ink'}));
 const trGDPStack=(side,t,items)=>({t,sub:'YoY GDP growth (%) · estimated contributions (pp); residual reconciles to GDP',bars:trSeries(items.map(i=>'GDP_'+side+'_'+i)),lines:trGDPLine(),stack:true,zero:true,height:300});
 const TR_FIGS={tr_activity:[{t:'Real GDP growth',sub:'% YoY and % QoQ (seasonally and calendar adjusted; not annualised)',bars:trSeries(['GDP_QOQ_SCA']).map(v=>({...v,color:'--qbar'})),lines:trGDPLine(),zero:true,height:300},trGDPStack('DEMAND','GDP growth contributions: demand',['CONSUMPTION','INVESTMENT','GOVERNMENT','NET_EXPORTS','RESIDUAL']),trGDPStack('SUPPLY','GDP growth contributions: supply',['AGRICULTURE','INDUSTRY','CONSTRUCTION','SERVICES','RESIDUAL'])],tr_rates:[trLine('Loan rates (flow)','% · weekly loan observations; funding daily',['COMMERCIAL','CONSUMER','FUNDING']),trLine('Credit spreads (flow)','% · effective relative spreads, as calculated in R',['COMMERCIAL','CONSUMER','DEPOSIT','COMM_SPREAD','CONS_SPREAD']),trLine('Consumer loans (flow)','% · weekly',['GPL','AUTO','MORTGAGE']),trLine('Funding rates','% · daily',['FUNDING','REPO','LOWER_BAND','UPPER_BAND'])],tr_bop:[trBop('','Monthly'),trBop('_12M','12-month sum')],tr_trade:[trLine('Monthly','USD billion',['TRADE_EXPORT','TRADE_IMPORT','TRADE_BALANCE']),trLine('12-month sum','USD billion',['TRADE_EXPORT_12M','TRADE_IMPORT_12M','TRADE_BALANCE_12M'])],tr_cpi:[trLine('Goods vs services','% year-on-year',['CPI_HEADLINE','CPI_GOODS','CPI_SERVICES']),trLine('Headline vs core','% year-on-year',['CPI_HEADLINE','CPI_CORE_B','CPI_CORE_C']),trLine('Goods vs services (trend)','% month-on-month · three-month moving average, seasonally adjusted',['TREND_CPI','TREND_GOODS','TREND_SERVICES']),trLine('Headline vs core (trend)','% month-on-month · three-month moving average, seasonally adjusted',['TREND_CPI','TREND_CORE_B','TREND_CORE_C'])]};
+function viewTurkeySources(){
+ const groups=[['Activity',['GDP_EXPENDITURE','GDP_PRODUCTION','HIGH_FREQUENCY_ACTIVITY','LABOUR_MARKET','PMI_CAPACITY','CONFIDENCE']],['Inflation',['INFLATION']],['External Trade',['EXTERNAL_TRADE']],['Balance of Payments',['BALANCE_OF_PAYMENTS']],['Banking & Financial Markets',['INTEREST_RATES']]];
+ const entries=Object.entries(S());
+ const sourceInfo=(s)=>{
+   const codes=[...new Set(s.source.match(/TP\.[A-Za-z0-9.]+/g)||[])];
+   if(s.code==='TR_COMM_SPREAD') codes.push('TP.KTF17','TP.TRY.MT06');
+   if(s.code==='TR_CONS_SPREAD') codes.push('TP.KTFTUK','TP.TRY.MT06');
+   const evds=s.source.includes('EVDS');
+   const tuik=s.source.includes('TurkStat');
+   const links=[evds?'<a href="https://evds3.tcmb.gov.tr/" target="_blank" rel="noopener">CBRT EVDS</a>':'',tuik?'<a href="https://data.tuik.gov.tr/" target="_blank" rel="noopener">TurkStat</a>':''].filter(Boolean).join(' / ');
+   return [links||esc(s.source),codes.length?codes.map(esc).join(', '):'Not specified in snapshot'];
+ };
+ const label=(s)=>{
+   const id=s.code.replace(/^TR_/,'');
+   const names={GPL:'General purpose loan rate',AUTO:'Auto loan rate',MORTGAGE:'Mortgage loan rate',COMMERCIAL:'Commercial loan rate',CONSUMER:'Consumer loan rate',DEPOSIT:'TL deposit rate',COMM_SPREAD:'Commercial loan / deposit spread',CONS_SPREAD:'Consumer loan / deposit spread',FUNDING:'CBRT average funding rate',REPO:'BIST overnight repo rate',LOWER_BAND:'Lower corridor rate',UPPER_BAND:'Upper corridor rate'};
+   if(names[id]) return names[id];
+   if(id.startsWith('TREND_')) return (TR_LABELS[id]||s.label)+' inflation trend';
+   if(id.startsWith('CPI_')) return (TR_LABELS[id]||s.label)+' inflation';
+   if(id.startsWith('GDP_DEMAND_')||id.startsWith('GDP_SUPPLY_')) return (id.startsWith('GDP_DEMAND_')?'Demand: ':'Supply: ')+(TR_LABELS[id]||s.label);
+   if(id.startsWith('TRADE_')||id.startsWith('BOP_')) return (TR_LABELS[id]||s.label)+(id.endsWith('_12M')?' (12-month sum)':' (monthly)');
+   return TR_LABELS[id]||s.label;
+ };
+ const known=new Set(groups.flatMap(g=>g[1]));
+ groups.push(['Other series',[...new Set(entries.map(([,s])=>s.block).filter(b=>!known.has(b)))]]);
+ let rows='';
+ for(const [group,blocks] of groups){
+   const sub=entries.filter(([,s])=>blocks.includes(s.block)); if(!sub.length) continue;
+   rows+=`<tr class="grp"><td colspan="5">${esc(group)}</td></tr>`;
+   for(const [id,s] of sub){ const [source,codes]=sourceInfo(s); const L=latest(id);
+     rows+=`<tr><td>${esc(label(s))}<span class="u">${esc(s.unit)}</span><div class="note">${esc(s.code)}</div></td><td>${source}</td><td class="src" style="white-space:normal;overflow-wrap:anywhere">${codes}</td><td style="white-space:normal">${esc(s.transform||'Not specified in snapshot')}</td><td>${L?esc(fmtDate(L[0],s.freq)):'Unavailable'}</td></tr>`;
+   }
+ }
+ panel.innerHTML=`<div class="sechead"><h2>Sources & Method</h2></div>
+ <div class="prose">
+ <p>Data are retrieved from the <a href="https://evds3.tcmb.gov.tr/" target="_blank" rel="noopener">Central Bank of the Republic of Türkiye (CBRT), Electronic Data Delivery System (EVDS)</a>, using a server-side API key, and directly from the <a href="https://data.tuik.gov.tr/" target="_blank" rel="noopener">Turkish Statistical Institute (TurkStat)</a> for seasonally adjusted CPI index levels. Dashboard users do not need an API key.</p>
+ <p><strong>Activity.</strong> Real GDP year-on-year growth is calculated from chain-linked volumes; quarter-on-quarter growth uses seasonally and calendar-adjusted GDP and is not annualised. Demand and supply contributions are estimates in percentage points, using nominal component shares in GDP in the same quarter of the previous year multiplied by real year-on-year growth. Imports are subtracted from exports; services contributions are summed across sectors. Residuals reconcile the estimates to total GDP growth and include omitted components and chain-linking differences.</p>
+ <p><strong>Inflation.</strong> Annual rates use 2025-base CPI indices and a 12-month lag. Trend inflation is the trailing three-month arithmetic average of monthly changes in official seasonally adjusted index levels, not annualised.</p>
+ <p><strong>External Trade.</strong> Exports and imports are shown in USD billions; the balance is exports less imports. Twelve-month totals are trailing sums of complete months. The pipeline assumes source values are in USD thousands and divides by one million.</p>
+ <p><strong>Balance of Payments.</strong> Monthly flows and trailing 12-month totals are displayed in USD billions (source values assumed to be USD millions). Current account, financial account and reserve transaction signs are reversed relative to the inputs: positive current account indicates a deficit, positive financial account and net errors and omissions indicate inflows, and negative reserve transactions indicate accumulation.</p>
+ <p><strong>Banking & Financial Markets.</strong> Loan and deposit flow rates are weekly; CBRT funding and BIST overnight repo rates are daily. Relative loan/deposit spreads equal 100 × [(1 + loan rate/100)/(1 + deposit rate/100) − 1], not simple percentage-point differences. Corridor rates are shown only if an approved input file is available, carrying forward the last effective rate.</p>
+ <p><strong>Revisions and limitations.</strong> Official data may be revised. Missing periods are not replaced with zero. Estimated GDP contributions are not official published contributions. Trade and balance of payments unit conversions follow the pipeline assumptions and should be checked against source metadata.</p>
+ <p><strong>Updates.</strong> <code>R/update_data.R</code> rebuilds the Türkiye snapshot. GitHub Actions (<code>update-and-deploy.yml</code>) runs daily at approximately 09:15 and 17:15 Türkiye time, including weekends, and can be launched manually from Actions. A successful validated build deploys the site. The Refresh data button re-reads the published snapshot; the page also checks every 15 minutes. Neither triggers a new source download.</p>
+ <p class="stamp">Last successful data fetch: ${esc(driveData.updatedAt||'Unavailable')} · Latest observation: ${esc(DATA.meta.refreshed||'Unavailable')} · ${entries.length} series · Source: <a href="drive_ingestion/snapshots/turkey.json">turkey.json</a></p>
+ </div><div style="margin-top:24px"><h3>Series catalogue</h3><p class="note">Available series, source, input codes, treatment and latest observation. Dashboard IDs appear below each series name. Codes are shown as recorded in the snapshot (GDP decompositions may list multiple inputs).</p>
+ ${entries.length?`<div class="tblwrap"><table class="tr-catalogue"><thead><tr><th scope="col">Series</th><th scope="col">Source</th><th scope="col">Code / inputs</th><th scope="col">Treatment</th><th scope="col">Latest observation</th></tr></thead><tbody>${rows}</tbody></table></div>`:`<p class="note">${turkeyLoading?'Loading series catalogue…':'No series are currently available.'}</p>`}</div>`;
+}
+
 function viewTurkeySection(){
  const fs=TR_FIGS[state.tab]; const title=TABS.find(t=>t.k===state.tab).l;
- panel.innerHTML=`<div class="sechead"><h2>${esc(title)}</h2>${rangeCtl()}</div><p class="note">Experimental · data appear after a successful R update. Missing series are explicitly identified.</p><div class="grid">${fs.map((f,i)=>`<figure class="fig" style="margin:0"><div><h3>${esc(f.t)}</h3><div class="sub">${esc(f.sub)}</div></div><div class="lg" data-i="${i}"></div><div class="chart" data-i="${i}"></div><figcaption class="src" data-note="${i}"></figcaption></figure>`).join('')}</div>`;
+ panel.innerHTML=`<div class="sechead"><h2>${esc(title)}</h2>${rangeCtl()}</div><p class="note">Charts use the latest available observations. Missing series are identified below each chart.</p><div class="grid">${fs.map((f,i)=>`<figure class="fig" style="margin:0"><div><h3>${esc(f.t)}</h3><div class="sub">${esc(f.sub)}</div></div><div class="lg" data-i="${i}"></div><div class="chart" data-i="${i}"></div><figcaption class="src" data-note="${i}"></figcaption></figure>`).join('')}</div>`;
  bindRange(); const draw=()=>fs.forEach((f,i)=>{const h=panel.querySelector(`.chart[data-i="${i}"]`),lg=panel.querySelector(`.lg[data-i="${i}"]`),note=panel.querySelector(`[data-note="${i}"]`); const all=[...(f.bars||[]),...(f.lines||[])],missing=all.filter(v=>!S()[v.id]?.data?.length);const bars=(f.bars||[]).filter(v=>S()[v.id]?.data?.length),lines=(f.lines||[]).filter(v=>S()[v.id]?.data?.length);lg.innerHTML=legendHTML([...bars,...lines],bars);note.textContent=(bars.length+lines.length?'Source: '+[...new Set([...bars,...lines].map(v=>S()[v.id].source))].join(', '):'Awaiting source data.')+(missing.length?' · Missing: '+missing.map(v=>v.name).join(', '):'');if(f.stack&&missing.length){h.innerHTML='<p class="note">Waiting for all chart components.</p>';return;} if(!bars.length&&!lines.length){h.innerHTML='<p class="note">Data not yet available.</p>';return;} drawChart(h,{...f,bars,lines,aria:f.t});}); draw();observe(draw);
 }
 
-function renderTabs(){ const t=document.getElementById('tabs'); const buttons=items=>items.map(x=>`<button type="button" role="tab" id="tab-${x.k}" aria-selected="${x.k===state.tab}" tabindex="${x.k===state.tab?0:-1}" data-k="${x.k}">${x.l}</button>`).join(''); t.innerHTML=`<div class="tabs-row" role="presentation">${buttons(TABS.slice(0,6))}</div>`+(TABS.length>6?`<div class="tabs-row" role="presentation">${buttons(TABS.slice(6))}</div>`:'');
+function renderTabs(){ const t=document.getElementById('tabs'); const buttons=items=>items.map(x=>`<button type="button" role="tab" id="tab-${x.k}" aria-selected="${x.k===state.tab}" tabindex="${x.k===state.tab?0:-1}" data-k="${x.k}">${x.l}</button>`).join(''); t.innerHTML=`<div class="tabs-row" role="presentation">${buttons(IS_TURKEY?TABS:TABS.slice(0,6))}</div>`+(!IS_TURKEY&&TABS.length>6?`<div class="tabs-row" role="presentation">${buttons(TABS.slice(6))}</div>`:'');
   t.querySelectorAll('button').forEach((b,i,all)=>{ b.addEventListener('click',()=>go(b.dataset.k)); b.addEventListener('keydown',e=>{ if(!['ArrowRight','ArrowLeft'].includes(e.key)) return; e.preventDefault(); const j=(i+(e.key==='ArrowRight'?1:-1)+all.length)%all.length; all[j].focus(); go(all[j].dataset.k); }); });
   const sel=t.querySelector('[aria-selected="true"]'); if(sel) sel.scrollIntoView({block:'nearest',inline:'nearest'}); }
 function go(k){ if(k==='financiero'){k='explorador';ex.view='pizarra';} state.tab=k; try{ history.replaceState(null,'','#'+k); }catch(e){ location.hash=k; } render(); window.scrollTo({top:0}); }
 function render(){ renderTabs(); panel.setAttribute('aria-labelledby','tab-'+state.tab); if(ro){ro.disconnect();ro=null;}
   if(IS_TURKEY){
-    if(TR_FIGS[state.tab]) viewTurkeySection();
+    if(state.tab==='tr_sources') viewTurkeySources();
+    else if(TR_FIGS[state.tab]) viewTurkeySection();
     else if(DATA.meta.n_series) viewExplorer();
     else panel.innerHTML=`<p class="note">${turkeyLoading?(isEN()?'Loading data…':'Cargando datos…'):(isEN()?'Data unavailable.':'Datos no disponibles.')}</p>`;
-    const title='Türkiye Macro Monitor — experimental';
+    const title='Türkiye Macro Monitor';
     document.title=title;
     document.querySelector('.mast h1').textContent=title;
-    document.querySelector('.mast .lede').textContent='Activity, interest rates, inflation, external trade and balance of payments.';
+    document.querySelector('.mast .lede').textContent='Activity, inflation, external trade, balance of payments, banking and financial markets.';
     document.getElementById('stamp').textContent=DATA.meta.n_series
       ? (isEN()?'Latest observation: ':'Última observación: ')+DATA.meta.refreshed+' · '+DATA.meta.n_series+' series'+(driveData.updatedAt?' · Last successful fetch: '+driveData.updatedAt:'') : '';
-    document.getElementById('foot').textContent='Experimental prototype · sources identified per chart. Not an official publication.';
+    document.getElementById('foot').textContent='Sources identified per chart and in Sources & Method. Not an official publication.';
   }else{
     if(state.tab==='resumen') viewResumen(); else if(state.tab==='explorador') viewExplorer(); else if(state.tab==='bigdata') viewBigData(); else if(state.tab==='migracion') viewMigracion(); else if(state.tab==='tablas') viewTablas(); else if(state.tab==='previsiones') viewPrevisiones(); else if(state.tab==='fuentes') viewFuentes(); else viewBlock(state.tab);
     document.getElementById('stamp').textContent='Datos: '+DATA.meta.refreshed+' · '+DATA.meta.n_series+' series';
