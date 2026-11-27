@@ -144,13 +144,6 @@ for (nm in c('COMMERCIAL','CONSUMER')) {
 daily <- c(FUNDING='TP.APIFON4',REPO='TP.AOFOBAP')
 d <- fetch(daily,'04-01-2002',1,'daily funding rates')
 for (nm in names(daily)) add(nm,d$date,d[[nm]],nm,'INTEREST_RATES','Diaria','%',paste('CBRT EVDS',daily[[nm]]),'As published')
-# Interest-rate corridor is optional until the live CBRT HTML table has been verified.
-# A local, approved CSV with columns date, LOWER_BAND, UPPER_BAND can be supplied.
-if(file.exists('inputs/rate_bands.csv')) {
-  a <- read.csv('inputs/rate_bands.csv'); stopifnot(all(c('date','LOWER_BAND','UPPER_BAND') %in% names(a)))
-  a$date <- as.Date(a$date); a <- a[order(a$date),]; stopifnot(!anyNA(a$date),!anyDuplicated(a$date))
-  dates <- seq(min(a$date),Sys.Date(),by='day'); ix <- findInterval(dates,a$date)
-  for(nm in c('LOWER_BAND','UPPER_BAND')) add(nm,dates,a[[nm]][ix],nm,'INTEREST_RATES','Diaria','%','CBRT interest-rate corridor (provided CSV)','Last effective rate carried forward')
 
 # CBRT overnight interest rate corridor.
 # Retrieve official rate decisions and carry forward
