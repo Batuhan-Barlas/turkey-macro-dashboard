@@ -20,3 +20,22 @@ for k,s in j['series'].items():
         dates.append(d)
     assert dates==sorted(set(dates)),k
 print(f'Validated {len(j["series"])} series; no empty or duplicate observations.')
+
+# GDP is mandatory for new builds; --legacy permits checking the unchanged input snapshot.
+if '--legacy' not in sys.argv:
+    gdp = j['series']
+    def values(id):
+        s = gdp['TR_'+id]
+        assert s['frecuencia'] in ('Q','Trimestral'), id
+        result = dict(s['observaciones'])
+        assert all(dt.date.fromisoformat(d).day==1 and dt.date.fromisoformat(d).month in (1,4,7,10) for d in result), id
+        return result
+    yoy = values('GDP_YOY')
+    values('GDP_QOQ_SCA')
+    for side, items in [('DEMAND', ['CONSUMPTION','INVESTMENT','GOVERNMENT','NET_EXPORTS','RESIDUAL']), ('SUPPLY',['AGRICULTURE','INDUSTRY','CONSTRUCTION','SERVICES','RESIDUAL'])]:
+        parts = [values('GDP_'+side+'_'+i) for i in items]
+        assert all(set(p)==set(parts[0]) for p in parts), side
+        assert max(parts[0]) == max(yoy), (side,'latest quarter incomplete')
+        for day in parts[0]:
+            assert day in yoy and math.isclose(sum(p[day] for p in parts),yoy[day],abs_tol=1e-8), (side,day)
+    print('GDP quarterly dates and contribution reconciliation validated.')

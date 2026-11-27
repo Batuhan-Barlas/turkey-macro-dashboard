@@ -65,6 +65,7 @@ jobs:
             )
           '
 
+
       - name: Update EVDS and TurkStat data
         env:
           EVDS_API_KEY: ${{ secrets.EVDS_API_KEY }}

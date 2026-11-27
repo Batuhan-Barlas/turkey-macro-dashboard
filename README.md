@@ -40,3 +40,31 @@ Frontend syntax and snapshot schema can be checked with Node and Python. Actual 
 ## v0.2 changes
 
 Added R/tuik_extractor.R and R/fetch_tuik_cpi.R. Windows retains wininet; Linux uses libcurl. The original positional series mapping is preserved, with date and numeric checks and selected headers logged. Actual workbook selection, headings and values must be verified locally and on GitHub; R is not available in the preparation environment. The corridor remains optional. The validator now requires all five trend series.
+
+### National accounts (Activity)
+
+`R/national_accounts.R` adds quarterly real GDP YoY, SCA QoQ and two
+estimated contribution decompositions. It uses the existing EVDS key and
+schedule. The full history is re-fetched from 2009Q1 (YoY begins no earlier
+than 2010Q1). Contributions use same-quarter prior-year nominal GDP shares
+and real YoY rates; imports are subtracted and services sector contributions
+are summed. Residuals include omitted components (inventories/NPISH on the
+demand side, net product taxes on supply) and chain-linking differences.
+These are estimates, not official published contributions.
+
+**First run requires review:** catalogue matching uses CBRT's bundled metadata
+and refuses missing or ambiguous matches. It is not live-API verified.
+Run `Rscript R/list_gdp_catalogue.R` with CBRT installed to export the catalogue.
+If matching fails, create `inputs/gdp_series.csv` with columns `group,item,code`
+using verified EVDS codes. Required groups/items:
+
+- `demand_real`, `demand_nominal`: GDP,C,I,G,X,M
+- `gdp_sca`: GDP
+- `supply_real`, `supply_nominal`: A,IND,F,GI,J,K,L,MN,OQ,RU
+
+Use quarterly data, consistent nominal units and current non-archived groups.
+Review the resolved mappings printed in the update log even if matching succeeds.
+The new validator checks quarter dates, completeness and reconciliation. A failed
+build does not deploy. The checked-in snapshot retains existing observations only
+(normalized from date-keyed objects to arrays); GDP appears after a successful update.
+To validate this older snapshot only, pass `--legacy` to the validator.

@@ -5,23 +5,126 @@ key <- Sys.getenv('EVDS_API_KEY')
 if (!nzchar(key)) stop('Set EVDS_API_KEY in your local environment or GitHub Actions secret.')
 if (utils::packageVersion('CBRT') < '0.2.0') stop('Use CBRT >= 0.2.0 (EVDS3).')
 series <- list()
+
 fetch <- function(codes, start, frequency, group) {
-  # Suppress remote error text: it can contain request URLs or credentials.
-  d <- tryCatch(suppressWarnings(suppressMessages(CBRT::getDataSeries(unname(codes), CBRTKey=key, startDate=start, freq=frequency))), error=function(e) NULL)
-  if (is.null(d) || !all(c('time',unname(codes)) %in% names(d))) stop(paste('EVDS download failed or columns changed:',group))
-  d <- as.data.frame(d)[, c('time',unname(codes)), drop=FALSE] # CBRT returns data.table
-  names(d) <- c('date', names(codes)); d$date <- as.Date(d$date)
-  if (anyNA(d$date)) stop(paste('Invalid dates:',group))
-  if (frequency==5) d$date <- as.Date(format(d$date,'%Y-%m-01'))
-  d <- d[order(d$date),,drop=FALSE]
-  if (anyDuplicated(d$date)) stop(paste('Duplicate dates:',group))
+
+  message("EVDS fetching: ", group,
+          " | frequency=", frequency,
+          " | series=", length(codes))
+
+  d <- tryCatch(
+    suppressWarnings(
+      suppressMessages(
+        CBRT::getDataSeries(
+          unname(codes),
+          CBRTKey = key,
+          startDate = start,
+          freq = frequency
+        )
+      )
+    ),
+    error = function(e) {
+      msg <- conditionMessage(e)
+      msg <- gsub(key, "[REDACTED]", msg, fixed = TRUE)
+      msg <- gsub("https?://[^[:space:]]+",
+                  "[URL REDACTED]", msg)
+      stop("EVDS request failed [", group, "]: ",
+           msg, call. = FALSE)
+    }
+  )
+
+  if (is.null(d)) {
+    stop("EVDS returned NULL: ", group)
+  }
+
+  d <- as.data.frame(d)
+
+  names(d) <- gsub("_", ".", names(d), fixed = TRUE)
+
+  message("EVDS rows: ", nrow(d))
+  message("EVDS columns: ", paste(names(d), collapse = ", "))
+
+  required <- c("time", unname(codes))
+  missing_cols <- setdiff(required, names(d))
+
+  if (length(missing_cols) > 0) {
+    stop("Missing EVDS columns [", group, "]: ",
+         paste(missing_cols, collapse = ", "))
+  }
+
+  d <- d[, required, drop = FALSE]
+  names(d) <- c("date", names(codes))
+
+  if (frequency == 6 && is.numeric(d$date) &&
+      !inherits(d$date, "Date")) {
+
+    year <- floor(d$date)
+    quarter <- round((d$date - year) * 4) + 1
+
+    if (anyNA(quarter) ||
+        any(!quarter %in% 1:4) ||
+        any(year < 1900 | year > 2100) ||
+        any(abs((d$date - year) * 4 -
+                (quarter - 1)) > 1e-6)) {
+      stop("Invalid quarterly dates: ", group)
+    }
+
+    d$date <- as.Date(
+      sprintf("%04d-%02d-01",
+              as.integer(year),
+              as.integer(1 + 3 * (quarter - 1)))
+    )
+
+  } else {
+    d$date <- as.Date(d$date)
+  }
+
+  if (anyNA(d$date)) {
+    stop("Invalid dates: ", group)
+  }
+
+  if (frequency == 5) {
+    d$date <- as.Date(format(d$date, "%Y-%m-01"))
+  }
+
+  d <- d[order(d$date), , drop = FALSE]
+
+  if (anyDuplicated(d$date)) {
+    stop("Duplicate dates: ", group)
+  }
+
   for (nm in names(codes)) {
     d[[nm]] <- as.numeric(d[[nm]])
-    if (!any(is.finite(d[[nm]]))) stop(paste('No numeric observations:',group,nm))
+
+    if (!any(is.finite(d[[nm]]))) {
+      stop("No numeric observations: ", group, " / ", nm)
+    }
+
+    message(
+      "  ", nm,
+      ": ", sum(is.finite(d[[nm]])),
+      " valid observations"
+    )
   }
-  if (frequency==5) d <- merge(data.frame(date=seq(min(d$date),max(d$date),by='month')),d,by='date',all.x=TRUE,sort=TRUE)
-  d
+
+  if (frequency == 5) {
+    d <- merge(
+      data.frame(
+        date = seq(min(d$date), max(d$date), by = "month")
+      ),
+      d,
+      by = "date",
+      all.x = TRUE,
+      sort = TRUE
+    )
+  }
+
+  message("EVDS success: ", group,
+          " | ", min(d$date), " to ", max(d$date))
+
+  return(d)
 }
+
 add <- function(id, date, value, title, block, freq, unit, source, transform) {
   keep <- !is.na(date) & is.finite(value)
   date <- as.character(date[keep]); value <- as.numeric(value[keep])
@@ -83,6 +186,9 @@ for(nm in c(names(trade),'TRADE_BALANCE')) {
   add(nm,t$date,x/1e6,nm,'EXTERNAL_TRADE','Mensual','USD bn',src,'Shiny scaling: assumed USD thousand divided by 1e6; balance exports minus imports')
   add(paste0(nm,'_12M'),t$date,roll(x,12,sum)/1e6,paste(nm,'12-month sum'),'EXTERNAL_TRADE','Mensual','USD bn',src,'Trailing 12-month sum; divide by 1e6')
 }
+# GDP module runs before atomic snapshot export.
+source('R/national_accounts.R', encoding='UTF-8')
+update_gdp()
 # Export exact original Turkey snapshot structure, with explicit weekly extension.
 # No existing internal/example snapshot is copied automatically.
 path <- 'site/drive_ingestion/snapshots/turkey.json'
